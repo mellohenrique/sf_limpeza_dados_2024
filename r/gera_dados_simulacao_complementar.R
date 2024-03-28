@@ -4,7 +4,7 @@
 
 # Carrega dados ----
 ## VAAF ----
-recursos_vaaf = openxlsx2::read_xlsx('dados/recursos/receitas_vaaf.xlsx', start_row = 2, na.strings = '-')
+recursos_vaaf = openxlsx2::read_xlsx('dados/recursos/recursos_vaaf.xlsx', start_row = 2, na.strings = '-')
 ## VAAT ----
 recursos_vaat = openxlsx2::read_xlsx('dados/recursos/recursos_vaat.xlsx', startRow = 2, na.strings = '-')
 recursos_vaat_complementares = openxlsx2::read_xlsx('dados/recursos/recursos_vaat_complementares.xlsx', startRow = 2, na.strings = '-')
@@ -68,6 +68,9 @@ complementar[] = lapply(complementar, function(x){ifelse(is.na(x), 0, x)})
 if (!any(complementar[complementar$inabilitados_vaar,]$peso_vaar > 0)){
   complementar$inabilitados_vaar = NULL
 }
+
+# Padronizando nomes
+names(complementar) = c('ibge', 'uf', 'nome', 'recursos_vaaf', 'recursos_vaat', 'nse', 'peso_vaar', 'inabilitados_vaat')
 
 # Salva resultados
 openxlsx2::write_xlsx(complementar, 'dados/simulacao/complementar.xlsx')

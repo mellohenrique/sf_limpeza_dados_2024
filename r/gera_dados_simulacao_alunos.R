@@ -13,4 +13,4 @@ matriculas[] = lapply(matriculas, as.numeric)
 matriculas[] = lapply(matriculas, function(x){ifelse(is.na(x), 0, x)})
 
 # Salvando dados
-openxlsx2::write_xlsx(matriculas, 'dados/matriculas/matriculas_limpa.xlsx')
+openxlsx2::write_xlsx(matriculas, 'dados/simulacao/alunos.xlsx')

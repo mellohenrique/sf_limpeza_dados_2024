@@ -1,4 +1,4 @@
-# Salva os resultados de matriculas casos especiais
+# Carrega os casos de matriculas em etapas diferenciadas no VAAT
 
 # Carrega pacote
 library(tidyverse)
