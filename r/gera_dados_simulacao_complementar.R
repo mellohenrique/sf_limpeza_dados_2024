@@ -72,5 +72,8 @@ if (!any(complementar[complementar$inabilitados_vaar,]$peso_vaar > 0)){
 # Padronizando nomes
 names(complementar) = c('ibge', 'uf', 'nome', 'recursos_vaaf', 'recursos_vaat', 'nse', 'peso_vaar', 'inabilitados_vaat')
 
+# Gera coluna de nivel fiscal, ainda faltante colocando valor 1 padrao
+complementar$nf = 1
+
 # Salva resultados
 openxlsx2::write_xlsx(complementar, 'dados/simulacao/complementar.xlsx')
