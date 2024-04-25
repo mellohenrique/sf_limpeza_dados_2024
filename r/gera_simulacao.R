@@ -8,7 +8,7 @@ matriculas = openxlsx2::read_xlsx('dados/simulacao/alunos.xlsx')
 complementar = openxlsx2::read_xlsx('dados/simulacao/complementar.xlsx')
 
 ## Carregando dados de pesos ----
-pesos = readxl::read_excel('dados/simulacao/pesos_etapas.xlsx')
+pesos = openxlsx2::read_xlsx('dados/simulacao/pesos_etapas.xlsx')
 
 # Simulando ----
 simulacao = simulador.fundeb::simula_fundeb(
