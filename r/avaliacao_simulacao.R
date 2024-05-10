@@ -47,8 +47,8 @@ simulacao %>%
   mutate(teste_pre = recursos_vaaf - recursos_vaaf_inicial_planilha,
          teste_pos = recursos_vaaf_final - recursos_vaaf_final_planilha) %>%
   summarise(
-    recursos_vaaf_inicial = mean(abs(teste_pre) > 1),
-    recursos_vaaf_final = mean(abs(teste_pos) > 1)
+    recursos_vaaf_inicial = sum(abs(teste_pre) > .01),
+    recursos_vaaf_final = sum(abs(teste_pos) > .1)
   )
 
 ### Teste VAAF estados ----
@@ -62,7 +62,8 @@ simulacao %>% group_by(uf) %>%
   summarise(recursos_vaaf = sum(recursos_vaaf_final), vaaf = mean(vaaf_final)) %>%
   left_join(vaaf, by = 'uf') %>%
   mutate(teste_vaaf =  abs(vaaf - vaaf_inep),
-         teste_recursos_vaaf =   abs(recursos_vaaf - recursos_vaaf_inep ))
+         teste_recursos_vaaf =   abs(recursos_vaaf - recursos_vaaf_inep )) %>%
+  filter(teste_vaaf > 0.01)
 
 ## VAAT ----
 ### Limpeza dados vaat ----
@@ -76,16 +77,6 @@ ibge_corretos = simulacao %>%
   left_join(vaat, by = 'ibge') %>%
   mutate(teste = abs(round(vaat_pre, 2) - vaat_pre_inep)) %>%
   select(ibge, teste)
-
-### Hipótese de diferenca
-matriculas_bruto %>%
-  left_join(ibge_corretos) %>%
-  filter(!is.na(teste)) %>%
-  select(ibge, teste, educacao_indigena_e_quilombola_rede_publica, educacao_especial_rede_publica) %>%
-  filter(ibge > 100) %>%
-  filter(teste) %>%
-  summarise(mean(educacao_indigena_e_quilombola_rede_publica), mean(educacao_especial_rede_publica))
-
 
 
 ## VAAR ----
