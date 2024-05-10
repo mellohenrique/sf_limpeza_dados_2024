@@ -6,7 +6,7 @@ A principal fonte de dados utilizada foi a [portaria interministerial número 1 
 
 ## Etapas
 
-O projeto de limpeza dos do fundeb de 2024. Etapas:
+O projeto de limpeza dos do fundeb de 2024. O projeto consiste das seguintes etapas:
 
 1. Obtenção dos dados (extração manual do portal);
 2. Conversão dos dados pdf em .xlsx (usando script em python e o portal [ilovepdf](https://www.ilovepdf.com/pt);
