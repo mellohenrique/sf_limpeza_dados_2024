@@ -11,13 +11,26 @@ complementar = openxlsx2::read_xlsx('dados/simulacao/complementar.xlsx')
 pesos = openxlsx2::read_xlsx('dados/simulacao/pesos_etapas.xlsx')
 
 # Simulando ----
-simulacao = simulador.fundeb::simula_fundeb(
-  dados_alunos = matriculas,
+simulacao_base = simulador.fundeb::simula_fundeb(
+  dados_matriculas = matriculas,
   dados_complementar = complementar,
-  dados_peso = pesos,
+  dados_peso = pesos[,2:4],
   complementacao_vaaf = 24153287047.4,
   complementacao_vaat = 18114965285.51,
-  complementacao_vaar = 3622993057.10)
+  complementacao_vaar = 0)
+
+# Gerando simulacao base agregada
+simulacao_base_agregada = stats::aggregate(
+  list(complemento_uniao = simulacao_base$complemento_uniao),
+  by = list(uf = simulacao_base$uf),
+  FUN=sum)
 
 # Salvando resultado ----
-readr::write_excel_csv2(simulacao, 'dados/simulacao/simulacao_padrao.csv')
+readr::write_excel_csv2(simulacao_base, 'dados/simulacao/simulacao_padrao.csv')
+
+# Salva dados para o dashboard
+save(matriculas, file = 'dados/dash/matriculas.rda')
+save(complementar, file = 'dados/dash/complementar.rda')
+save(pesos, file = 'dados/dash/pesos.rda')
+save(simulacao_base, file = 'dados/dash/simulacao_base.rda')
+save(simulacao_base_agregada, file = 'dados/dash/simulacao_base_agregada.rda')
