@@ -21,12 +21,11 @@ matriculas_teste = matriculas_teste_bruto %>%
 ### Teste matriculas vaaf ----
 simulacao %>%
   group_by(uf) %>%
-  mutate(prop = alunos_vaaf/sum(alunos_vaaf)) %>%
+  mutate(prop = matriculas_vaaf/sum(matriculas_vaaf)) %>%
   ungroup() %>%
   select(ibge, prop) %>%
   left_join(matriculas_teste, by = 'ibge') %>%
-  mutate(teste = abs(prop - prop_vaaf) > 0.00001)  %>%
-  pull(teste) %>% any()
+  mutate(teste = abs(prop - prop_vaaf) > 0.00001) %>% View()
 
 
 ## Teste VAAF entes ----

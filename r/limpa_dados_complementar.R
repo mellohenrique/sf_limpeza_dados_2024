@@ -75,5 +75,8 @@ names(complementar) = c('ibge', 'uf', 'nome', 'recursos_vaaf', 'recursos_vaat', 
 # Gera coluna de nivel fiscal, ainda faltante colocando valor 1 padrao
 complementar$nf = 1
 
+# Altera nomes dos estados
+complementar[complementar$ibge < 100,]$nome =c('Rondônia', 'Acre', 'Amazonas', 'Roraima', 'Pará', 'Amapá', 'Tocantins', 'Maranhão', 'Piauí', 'Ceará', 'Rio Grande do Norte', 'Paraíba', 'Pernambuco', 'Alagoas', 'Sergipe', 'Bahia', 'Minas Gerais', 'Espírito Santo', 'Rio de Janeiro', 'São Paulo', 'Paraná', 'Santa Catarina', 'Rio Grande do Sul', 'Mato Grosso do Sul', 'Mato Grosso', 'Goiás', 'Distrito Federal')
+
 # Salva resultados
 openxlsx2::write_xlsx(complementar, 'dados/simulacao/complementar.xlsx')
